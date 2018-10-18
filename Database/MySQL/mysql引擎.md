@@ -33,10 +33,10 @@
 > * InnoDB的数据文件本身即是索引文件：  
 > > 在MyISAM索引文件和数据文件是分离的，索引文件仅保存数据记录的地址。  
 > > 而在InnoDB中，表数据文件本身就是按B+Tree组织的一个索引结构，这棵树的叶节点data域保存了完整的数据记录。这个索引的key是数据表的主键，因此InnoDB表数据文件本身就是主索引。如图所示：   
-> !()[https://upload-images.jianshu.io/upload_images/4685968-36a10ea5ce6fdea4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/543/format/webp]
+> ![](https://upload-images.jianshu.io/upload_images/4685968-36a10ea5ce6fdea4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/543/format/webp)
 > > 可以看到叶节点包含了完整的数据记录。这种索引叫做"聚集索引"。由于InnoDB的数据文件本身要按主键聚集，所以InnoDB要求表必须有主键（MyISAM可以没有），如果没有显式指定，则MySQL系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则MySQL自动为InnoDB表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。
 > * InnoDB的辅索引data域存储相应记录主键的值而不是地址。换句话说，InnoDB的所有辅助索引都引用主键作为data域
-> !()[https://upload-images.jianshu.io/upload_images/4685968-9e8eb904029b3bce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/543/format/webp]
+> ![](https://upload-images.jianshu.io/upload_images/4685968-9e8eb904029b3bce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/543/format/webp)
 > > 这里以英文字符的ASCII码作为比较准则，聚集索引这种实现方式使得按主键的搜索十分高效，但是辅助索引搜索需要检索两遍索引：
 > > 1. 首先检索辅助索引获得主键
 > > 2. 然后用主键到主索引中检索获得记录
