@@ -46,5 +46,5 @@
     ```
     以上语句可以将 col1 与 col2 字段里有 'xxx', 'sss', 'ddd' 的数据全部查询出来。
 ### 参考资料：
-> [细说mysql索引](https://www.cnblogs.com/chenshishuo/p/5030029.html)
+> [细说mysql索引](https://www.cnblogs.com/chenshishuo/p/5030029.html)  
 > [导致索引失效的一些情况](https://www.cnblogs.com/areyouready/p/7802885.html)
